@@ -5,7 +5,10 @@ import '../styles/global.css';
 import '../styles/typography.css';
 import '../styles/animations.css';
 
-const { title = 'Vogue Architech', description = 'The official website of Vogue Architech.' } = Astro.props;
+const {
+  title = 'Vogue Architech — Spaces for a Better Tomorrow',
+  description = 'Architecture-led real estate development and design-build, bringing architectural thinking, engineering intelligence, and development together.',
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -14,9 +17,29 @@ const { title = 'Vogue Architech', description = 'The official website of Vogue 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#171715" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/images/brand/favicon-placeholder.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Marcellus&display=swap"
+      rel="stylesheet"
+    />
     <title>{title}</title>
   </head>
   <body>
     <slot />
+    <div class="site-toast" data-toast role="status" aria-live="polite" aria-atomic="true" aria-hidden="true">
+      <span class="site-toast__message" data-toast-message></span>
+      <button class="site-toast__close" type="button" aria-label="Dismiss notification" data-toast-close>
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <script>
+      import '../scripts/site.js';
+    </script>
   </body>
 </html>

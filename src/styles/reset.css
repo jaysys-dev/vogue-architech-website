@@ -4,6 +4,51 @@
   box-sizing: border-box;
 }
 
-body {
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+figure {
   margin: 0;
+}
+
+button,
+a {
+  color: inherit;
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--champagne);
+  outline-offset: 5px;
+}
+
+::selection {
+  color: var(--white);
+  background: var(--graphite);
 }

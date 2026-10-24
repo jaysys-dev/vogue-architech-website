@@ -1,9 +1,14 @@
+---
+import { homepageAssets, isHomepageAssetAvailable } from '../data/homepage-assets.js';
+
+const hasLogo = isHomepageAssetAvailable(homepageAssets.logo);
+---
+
 <footer class="site-footer">
   <div class="site-footer__main">
     <div class="site-footer__identity">
-      <a class="wordmark wordmark--footer" href="/" aria-label="Vogue Architech home">
-        <span class="wordmark__name">Vogue</span>
-        <span class="wordmark__descriptor">Architech</span>
+      <a class="brand-lockup brand-lockup--footer" href="/" aria-label="Vogue Architech home">
+        {hasLogo ? <img class="brand-logo" src={homepageAssets.logo} alt="Vogue Architech" /> : <span class="brand-fallback">Vogue Architech</span>}
       </a>
       <p>Architecture-led development and design-build, shaped around the way people live.</p>
     </div>

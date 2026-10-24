@@ -7,6 +7,22 @@ const toastClose = document.querySelector('[data-toast-close]');
 
 document.documentElement.classList.add('has-js');
 
+const revealTargets = document.querySelectorAll('[data-reveal]');
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+  revealTargets.forEach((target) => target.classList.add('is-in'));
+} else {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -7% 0px', threshold: 0.08 });
+
+  revealTargets.forEach((target) => revealObserver.observe(target));
+}
+
 if (header) {
   const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 24);
   updateHeader();

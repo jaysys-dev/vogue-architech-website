@@ -1,8 +1,13 @@
+---
+import { homepageAssets, isHomepageAssetAvailable } from '../data/homepage-assets.js';
+
+const hasLogo = isHomepageAssetAvailable(homepageAssets.logo);
+---
+
 <header class="site-header" data-site-header>
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <a class="wordmark" href="/" aria-label="Vogue Architech home">
-    <span class="wordmark__name">Vogue</span>
-    <span class="wordmark__descriptor">Architech</span>
+  <a class="brand-lockup" href="/" aria-label="Vogue Architech home">
+    {hasLogo ? <img class="brand-logo" src={homepageAssets.logo} alt="Vogue Architech" /> : <span class="brand-fallback">Vogue Architech</span>}
   </a>
 
   <button

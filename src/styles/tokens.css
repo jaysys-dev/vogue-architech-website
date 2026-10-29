@@ -1,17 +1,12 @@
 :root {
   color-scheme: light;
   --carbon: #171715;
-  --carbon-soft: #22221f;
   --white: #f8f6f1;
-  --limestone: #e9e4da;
-  --limestone-deep: #d7d0c4;
   --champagne: #c3aa7d;
   --graphite: #77736b;
   --line: rgba(30, 29, 26, 0.18);
-  --line-light: rgba(248, 246, 241, 0.2);
-  --serif: 'Marcellus', 'Iowan Old Style', 'Baskerville', 'Times New Roman', serif;
-  --sans: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
   --page-gutter: clamp(1.35rem, 6.5vw, 7.5rem);
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --hero-text-bottom: clamp(4rem, 7vh, 6rem);
+  --header-height: 5rem;
+  --serif: 'Marcellus', 'Iowan Old Style', 'Baskerville', 'Times New Roman', serif;
 }

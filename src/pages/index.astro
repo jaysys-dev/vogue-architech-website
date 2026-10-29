@@ -1,210 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import { homepageAssets, isHomepageAssetAvailable } from '../data/homepage-assets.js';
-
-const hasHero = isHomepageAssetAvailable(homepageAssets.hero);
-const hasLogo = isHomepageAssetAvailable(homepageAssets.logo);
-const hasProjects = homepageAssets.projects.map(isHomepageAssetAvailable);
-const hasAnyProjectImage = hasProjects.some(Boolean);
 ---
 
 <BaseLayout>
   <SiteHeader />
 
   <main id="main-content">
-    <section class:list={['hero', !hasHero && 'hero--no-image']} aria-labelledby="hero-heading">
-      {hasHero && <img class="hero__image" src={homepageAssets.hero} alt="" fetchpriority="high" />}
-      <div class="hero__veil" aria-hidden="true"></div>
+    <section class="hero" aria-labelledby="hero-heading">
+      <img
+        class="hero__image"
+        src="/images/hero/vogue-architech-hero.jpg"
+        alt=""
+        fetchpriority="high"
+        width="2000"
+        height="1333"
+        loading="eager"
+      />
+      <div class="hero__gradient" aria-hidden="true"></div>
 
-      {hasLogo && <img class="hero__signature" src={homepageAssets.logo} alt="Vogue Architech" />}
-
-      <div class="hero__content page-gutter">
-        <p class="eyebrow hero__eyebrow">Architecture <span>·</span> Development <span>·</span> Design &amp; Build</p>
-        <h1 id="hero-heading">Spaces for a<br /><em>Better Tomorrow</em></h1>
-        <p class="hero__intro">
-          Thoughtful developments shaped by architectural clarity, technical intelligence, and the way people live.
-        </p>
-        <div class="hero__actions">
-          <a class="button button--light" href="#selected-work">
-            Explore Our Work <span class="button__arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="text-link text-link--light" href="#practice">Discover the Practice <span aria-hidden="true">↓</span></a>
-        </div>
+      <div class="hero__statement">
+        <div class="hero__statement-line">THOUGHTFUL</div>
+        <div class="hero__statement-line">DEVELOPMENTS</div>
+        <div class="hero__statement-line hero__statement-line--gold">ELEVATED LIVING</div>
       </div>
 
-      <span class="hero__caption">Kampala, Uganda</span>
-      <a class="scroll-cue" href="#practice" aria-label="Scroll to discover the practice">
-        <span class="scroll-cue__line" aria-hidden="true"></span>
-        <span>Scroll to explore</span>
-      </a>
-    </section>
-
-    <section class="statement section-pad" id="practice" aria-labelledby="statement-heading">
-      <div class="statement__label-wrap">
-        <span class="section-index">01 / The practice</span>
-      </div>
-      <div class="statement__body" data-reveal>
-        <h2 id="statement-heading">
-          We design more than structures.<br />
-          <em>We shape places with purpose.</em>
-        </h2>
-        <div class:list={['statement__lower', !hasProjects[0] && 'statement__lower--copy-only']}>
-          <p>
-            Vogue Architech brings architectural thinking, engineering intelligence, and real-estate development
-            together to create enduring spaces.
-          </p>
-          {hasProjects[0] && <figure class="statement__image-frame"><img src={homepageAssets.projects[0]} alt="" loading="lazy" /></figure>}
-        </div>
-      </div>
-    </section>
-
-    <section class="practice section-pad" id="services" aria-labelledby="practice-heading">
-      <div class="section-heading">
-        <div>
-          <span class="section-index">02 / What we do</span>
-          <h2 id="practice-heading">A considered<br /><em>way of building.</em></h2>
-        </div>
-        <p>Three connected disciplines. One thoughtful approach to the built environment.</p>
-      </div>
-
-      <div class="practice-list">
-        <article class:list={['practice-row', !hasProjects[0] && 'practice-row--no-image']} data-reveal>
-          <span class="practice-row__number">01</span>
-          <div class="practice-row__copy">
-            <h3>Architecture</h3>
-            <p>Purposeful spaces shaped through proportion, context, material, and human experience.</p>
-          </div>
-          {hasProjects[0] && <figure class="practice-row__image"><img src={homepageAssets.projects[0]} alt="" loading="lazy" /></figure>}
-        </article>
-        <article class:list={['practice-row', hasProjects[1] ? 'practice-row--image-reversed' : 'practice-row--no-image']} data-reveal>
-          <span class="practice-row__number">02</span>
-          <div class="practice-row__copy">
-            <h3>Real Estate Development</h3>
-            <p>Thoughtful developments created for lasting value, relevance, and quality of life.</p>
-          </div>
-          {hasProjects[1] && <figure class="practice-row__image"><img src={homepageAssets.projects[1]} alt="" loading="lazy" /></figure>}
-        </article>
-        <article class:list={['practice-row', !hasProjects[2] && 'practice-row--no-image']} data-reveal>
-          <span class="practice-row__number">03</span>
-          <div class="practice-row__copy">
-            <h3>Design &amp; Build</h3>
-            <p>One coordinated process connecting design intelligence with disciplined execution.</p>
-          </div>
-          {hasProjects[2] && <figure class="practice-row__image"><img src={homepageAssets.projects[2]} alt="" loading="lazy" /></figure>}
-        </article>
-      </div>
-    </section>
-
-    <section class="work section-pad" id="selected-work" aria-labelledby="work-heading">
-      <div class="section-heading section-heading--work">
-        <div>
-          <span class="section-index">03 / Selected work</span>
-          <h2 id="work-heading">Selected <em>Work</em></h2>
-        </div>
-        <p>A considered view of work across architecture, development, and design-build.</p>
-      </div>
-
-      <div class:list={['work-grid', !hasAnyProjectImage && 'work-grid--images-unavailable']}>
-        <article class:list={['project', 'project--featured', !hasProjects[0] && 'project--image-unavailable']} data-reveal>
-          {hasProjects[0] && <figure class="project__visual">
-            <img
-              src={homepageAssets.projects[0]}
-              alt="Project 01, residential."
-              width="1400"
-              height="960"
-              loading="lazy"
-            />
-            <span class="project__index">01</span>
-          </figure>}
-          <div class="project__meta">
-            <h3>Project 01</h3>
-            <span>Residential</span>
-          </div>
-        </article>
-
-        <article class:list={['project', 'project--secondary', 'project--secondary-one', !hasProjects[1] && 'project--image-unavailable']} data-reveal>
-          {hasProjects[1] && <figure class="project__visual">
-            <img
-              src={homepageAssets.projects[1]}
-              alt="Project 02, commercial."
-              width="1000"
-              height="1150"
-              loading="lazy"
-            />
-            <span class="project__index">02</span>
-          </figure>}
-          <div class="project__meta">
-            <h3>Project 02</h3>
-            <span>Commercial</span>
-          </div>
-        </article>
-
-        <article class:list={['project', 'project--secondary', 'project--secondary-two', !hasProjects[2] && 'project--image-unavailable']} data-reveal>
-          {hasProjects[2] && <figure class="project__visual">
-            <img
-              src={homepageAssets.projects[2]}
-              alt="Project 03, mixed use."
-              width="1200"
-              height="850"
-              loading="lazy"
-            />
-            <span class="project__index">03</span>
-          </figure>}
-          <div class="project__meta">
-            <h3>Project 03</h3>
-            <span>Mixed Use</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="philosophy section-pad" aria-labelledby="philosophy-heading">
-      {hasLogo && <img class="philosophy__signature" src={homepageAssets.logo} alt="" aria-hidden="true" />}
-      <div class="philosophy__intro" data-reveal>
-        <span class="section-index section-index--light">04 / Design philosophy</span>
-        <h2 id="philosophy-heading">Beauty balanced<br />with <em>intelligence.</em></h2>
-      </div>
-      <div class="principles" data-reveal>
-        <div class="principle"><span>01</span><p>Purpose before excess</p></div>
-        <div class="principle"><span>02</span><p>Beauty supported by logic</p></div>
-        <div class="principle"><span>03</span><p>Details that strengthen the whole</p></div>
-      </div>
-      <p class="philosophy__note">A clear point of view, carried through every decision.</p>
-    </section>
-
-    <section class="approach section-pad" aria-labelledby="approach-heading">
-      <div class="section-heading section-heading--approach">
-        <div>
-          <span class="section-index">05 / The approach</span>
-          <h2 id="approach-heading">Clarity at<br /><em>every step.</em></h2>
-        </div>
-        <p>A connected process keeps purpose and execution in view from beginning to end.</p>
-      </div>
-      <ol class="approach-steps" data-reveal>
-        <li><span class="approach-steps__number">01</span><span class="approach-steps__name">Understand</span><p>Listen to place, people, and purpose.</p></li>
-        <li><span class="approach-steps__number">02</span><span class="approach-steps__name">Define</span><p>Set a clear direction from the outset.</p></li>
-        <li><span class="approach-steps__number">03</span><span class="approach-steps__name">Design</span><p>Shape the idea with material and light.</p></li>
-        <li><span class="approach-steps__number">04</span><span class="approach-steps__name">Deliver</span><p>Carry the design through with care.</p></li>
-      </ol>
-    </section>
-
-    <section class:list={['closing', !hasHero && 'closing--no-image']} aria-labelledby="closing-heading">
-      {hasHero && <img class="closing__image" src={homepageAssets.hero} alt="" loading="lazy" />}
-      <div class="closing__veil" aria-hidden="true"></div>
-      <div class="closing__content" data-reveal>
-        <span class="section-index section-index--light">06 / Begin a conversation</span>
-        <h2 id="closing-heading">Let’s shape<br /><em>what comes next.</em></h2>
-        <div class="closing__action">
-          <p>Begin a conversation about your project, place, or development.</p>
-          <button class="button button--light" type="button" data-toast-trigger>
-            Start a Conversation <span class="button__arrow" aria-hidden="true">↗</span>
-          </button>
-        </div>
-      </div>
+      <div class="hero__brand">VOGUE ARCHITECH</div>
     </section>
   </main>
-
-  <SiteFooter />
 </BaseLayout>

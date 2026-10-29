@@ -1,28 +1,24 @@
+html {
+  font-family: var(--serif);
+}
+
+body,
 h1,
 h2,
 h3,
-.wordmark__name {
-  font-family: var(--serif);
-  font-weight: 400;
+h4,
+h5,
+h6,
+p,
+span,
+div,
+a,
+button {
+  font-family: inherit;
 }
 
 h1,
-h2 {
+h2,
+h3 {
   text-wrap: balance;
-}
-
-h1 em,
-h2 em {
-  color: var(--champagne);
-  font-style: normal;
-}
-
-.statement h2 em,
-.section-heading h2 em,
-.closing h2 em {
-  color: var(--graphite);
-}
-
-.statement h2 > span {
-  display: block;
 }

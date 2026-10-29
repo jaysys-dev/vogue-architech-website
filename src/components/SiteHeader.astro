@@ -1,13 +1,17 @@
 ---
-import { homepageAssets, isHomepageAssetAvailable } from '../data/homepage-assets.js';
-
-const hasLogo = isHomepageAssetAvailable(homepageAssets.logo);
 ---
-
 <header class="site-header" data-site-header>
   <a class="skip-link" href="#main-content">Skip to content</a>
+
   <a class="brand-lockup" href="/" aria-label="Vogue Architech home">
-    {hasLogo ? <img class="brand-logo" src={homepageAssets.logo} alt="Vogue Architech" /> : <span class="brand-fallback">Vogue Architech</span>}
+    <img
+      class="brand-logo"
+      src="/images/brand/vogue-architech-logo.png"
+      alt="Vogue Architech"
+      width="1080"
+      height="1080"
+      loading="eager"
+    />
   </a>
 
   <button
@@ -17,16 +21,11 @@ const hasLogo = isHomepageAssetAvailable(homepageAssets.logo);
     aria-controls="primary-navigation"
     aria-label="Open navigation menu"
     data-menu-toggle
-    hidden
   >
-    <span></span><span></span>
+    <span class="menu-toggle__line" aria-hidden="true"></span>
+    <span class="menu-toggle__line" aria-hidden="true"></span>
+    <span class="menu-toggle__line" aria-hidden="true"></span>
   </button>
 
-  <nav class="site-nav" id="primary-navigation" aria-label="Main navigation" data-site-nav>
-    <a class="site-nav__link is-current" href="/" aria-current="page">Home</a>
-    <button class="site-nav__link" type="button" data-toast-trigger>About</button>
-    <button class="site-nav__link" type="button" data-toast-trigger>Services</button>
-    <button class="site-nav__link" type="button" data-toast-trigger>Projects</button>
-    <button class="site-nav__link" type="button" data-toast-trigger>Contact</button>
-  </nav>
+  <nav class="site-nav" id="primary-navigation" aria-label="Main navigation" hidden></nav>
 </header>

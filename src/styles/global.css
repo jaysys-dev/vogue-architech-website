@@ -38,9 +38,7 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
   position: sticky;
   top: 0;
   z-index: 30;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
   min-height: var(--header-height);
   padding-left: clamp(3rem, 4vw, 3.5rem);
   padding-right: clamp(3.4rem, 4vw, 4rem);
@@ -48,6 +46,45 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
   color: var(--carbon);
   border: none;
   box-shadow: none;
+  overflow: visible;
+}
+
+.site-header__top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.site-header__navigation-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--white);
+  color: var(--carbon);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+.nav-inner {
+  width: 100%;
+  padding: clamp(1rem, 2vw, 1.75rem) clamp(3rem, 4vw, 3.5rem)
+    clamp(1.5rem, 3vw, 2rem) clamp(3.4rem, 4vw, 4rem);
+}
+
+.nav-rule {
+  height: 1px;
+  background: var(--champagne);
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .brand-lockup {
@@ -66,9 +103,10 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
 }
 
 .menu-toggle {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
@@ -83,21 +121,26 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
 }
 
 .menu-toggle__line {
-  display: block;
+  position: absolute;
+  left: 0;
   width: 100%;
   height: 0.25rem;
   background: currentColor;
   border-radius: 2px;
+  transform-origin: center;
+  transition: top 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
 }
 
-.menu-toggle__line + .menu-toggle__line { margin-top: 0.4375rem; }
+.menu-toggle__line--top { top: 0; }
+.menu-toggle__line--mid { top: 50%; transform: translateY(-50%); }
+.menu-toggle__line--bot { top: 100%; transform: translateY(-100%); }
 
 .menu-toggle:focus-visible {
   outline: 2px solid #171715;
   outline-offset: 4px;
 }
-
-.site-nav { display: none; }
 
 /* Homepage hero — fills the remaining viewport beneath the sticky header */
 .hero {
@@ -208,4 +251,148 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
 
   .hero__brand { font-size: clamp(1.6rem, 6vw, 2.1rem); }
   .hero__statement-line { font-size: clamp(1.6rem, 6vw, 2.1rem); }
+}
+
+/* Expanding navigation overlay — revealed beneath the top row */
+.site-header__navigation-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--white);
+  color: var(--carbon);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+.nav-inner {
+  width: 100%;
+  padding: clamp(1rem, 2vw, 1.75rem) clamp(3rem, 4vw, 3.5rem)
+    clamp(1.5rem, 3vw, 2rem) clamp(3.4rem, 4vw, 4rem);
+}
+
+.nav-rule {
+  height: 1px;
+  background: var(--champagne);
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: clamp(1rem, 2vw, 1.5rem) 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-navigation__item {
+  appearance: none;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 3vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: normal;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  text-align: left;
+  color: var(--champagne);
+  cursor: default;
+  transition: color 0.2s ease;
+}
+
+.site-navigation__item.is-active {
+  color: #171715;
+  cursor: pointer;
+}
+
+.site-navigation__item:hover,
+.site-navigation__item:focus-visible {
+  color: #171715;
+}
+
+/* Open state — pointer devices: hover/focus-within; all devices: is-open class via script */
+@media (hover: hover) and (pointer: fine) {
+  .site-header:hover .site-header__navigation-panel,
+  .site-header:focus-within .site-header__navigation-panel {
+    max-height: 16rem;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .site-header:hover .nav-rule,
+  .site-header:focus-within .nav-rule { transform: scaleX(1); }
+
+  .site-header:hover .menu-toggle__line--top,
+  .site-header:focus-within .menu-toggle__line--top {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .site-header:hover .menu-toggle__line--mid,
+  .site-header:focus-within .menu-toggle__line--mid { opacity: 0; }
+  .site-header:hover .menu-toggle__line--bot,
+  .site-header:focus-within .menu-toggle__line--bot {
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+}
+
+.site-header.is-open .site-header__navigation-panel {
+  max-height: 16rem;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.site-header.is-open .nav-rule { transform: scaleX(1); }
+
+.site-header.is-open .menu-toggle__line--top {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+.site-header.is-open .menu-toggle__line--mid { opacity: 0; }
+.site-header.is-open .menu-toggle__line--bot {
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* Mobile & tablet — vertical list, panel fills remaining viewport */
+@media (max-width: 760px) {
+  .site-header.is-open .site-header__navigation-panel {
+    max-height: calc(100svh - var(--header-height));
+  }
+
+  .site-navigation {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: clamp(1.25rem, 3vw, 1.75rem);
+    margin-top: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .site-navigation__item {
+    font-size: clamp(1.75rem, 4vw, 2.4rem);
+  }
+
+  body.nav-is-open { overflow: hidden; }
+}
+
+/* Reduced motion — show final state immediately, no animation */
+@media (prefers-reduced-motion: reduce) {
+  .menu-toggle__line,
+  .site-header__navigation-panel,
+  .nav-rule,
+  .site-navigation__item { transition: none !important; }
 }

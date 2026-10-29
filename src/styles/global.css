@@ -33,9 +33,10 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
 
 .skip-link:focus { transform: translateY(0); }
 
-/* Sitewide header — warm strip in normal flow above the hero */
+/* Sitewide header — warm strip, sticky at top, in normal flow above the hero */
 .site-header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 30;
   display: flex;
   align-items: center;
@@ -58,8 +59,8 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
 
 .brand-logo {
   display: block;
-  width: auto;
-  height: clamp(2.9rem, 3.6vw, 4rem);
+  width: clamp(4.75rem, 5vw, 5.875rem);
+  height: clamp(4.75rem, 5vw, 5.875rem);
   object-fit: contain;
   object-position: left center;
 }
@@ -98,20 +99,25 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
 
 .site-nav { display: none; }
 
-/* Homepage hero — image-led, full composition preserved */
+/* Homepage hero — fills the remaining viewport beneath the sticky header */
 .hero {
   position: relative;
   width: 100%;
+  min-height: calc(100svh - var(--header-height));
   overflow: hidden;
   background: var(--carbon);
   color: var(--white);
+  display: flex;
+  align-items: flex-end;
 }
 
 .hero__image {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 .hero__gradient {
@@ -123,10 +129,10 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) 52%,
-    rgba(0, 0, 0, 0.12) 64%,
-    rgba(0, 0, 0, 0.48) 82%,
-    rgba(0, 0, 0, 0.72) 100%
+    rgba(0, 0, 0, 0) 48%,
+    rgba(0, 0, 0, 0.16) 60%,
+    rgba(0, 0, 0, 0.52) 78%,
+    rgba(0, 0, 0, 0.82) 100%
   );
 }
 
@@ -134,11 +140,11 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
 .hero__statement {
   position: absolute;
   z-index: 2;
+  bottom: clamp(3rem, 4vw, 3.6rem);
 }
 
 .hero__brand {
   left: clamp(3rem, 4vw, 3.6rem);
-  bottom: clamp(3rem, 4vw, 3.6rem);
   text-align: left;
   font-size: clamp(3rem, 4vw, 3.6rem);
   letter-spacing: 0.2em;
@@ -150,7 +156,6 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
 
 .hero__statement {
   right: clamp(3.3rem, 4vw, 4rem);
-  bottom: clamp(3rem, 4vw, 3.6rem);
   text-align: right;
   line-height: 1.18;
 }
@@ -170,7 +175,7 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
 /* Tablet — scale text and spacing proportionally */
 @media (max-width: 1050px) {
   .site-header { min-height: 4.4rem; }
-  .brand-logo { height: clamp(2.4rem, 3vw, 2.8rem); }
+  .brand-logo { height: clamp(2.6rem, 3.2vw, 3rem); }
   .hero__brand,
   .hero__statement {
     font-size: clamp(2.4rem, 3.5vw, 3rem);
@@ -178,12 +183,14 @@ button { padding: 0; background: none; cursor: pointer; font-family: inherit; bo
   .hero__statement-line { font-size: clamp(2.4rem, 3.5vw, 3rem); }
 }
 
-/* Mobile — reposition statement above brand, keep hero substantial */
+/* Mobile — header sticky, hero fills remaining viewport, text stacks in lower section */
 @media (max-width: 760px) {
   html { scroll-padding-top: 4rem; }
   .site-header { min-height: 4.2rem; padding-left: 1.25rem; padding-right: 1.25rem; }
   .menu-toggle { width: 2.5rem; height: 2.5rem; min-width: 2.5rem; min-height: 2.5rem; }
-  .brand-logo { height: clamp(1.9rem, 4vw, 2.3rem); }
+  .brand-logo { height: clamp(2rem, 4vw, 2.4rem); }
+
+  .hero { min-height: calc(100svh - var(--header-height)); }
 
   .hero__brand,
   .hero__statement {

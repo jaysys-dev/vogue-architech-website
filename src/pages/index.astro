@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import FeaturedWork from '../components/FeaturedWork.astro';
+import AboutPreview from '../components/AboutPreview.astro';
 ---
 
 <BaseLayout>
@@ -27,5 +29,8 @@ import SiteHeader from '../components/SiteHeader.astro';
 
       <div class="hero__brand">VOGUE ARCHITECH</div>
     </section>
+
+    <FeaturedWork />
+    <AboutPreview />
   </main>
 </BaseLayout>

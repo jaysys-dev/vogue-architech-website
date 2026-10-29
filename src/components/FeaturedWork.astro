@@ -1,0 +1,124 @@
+---
+const projects = [
+  {
+    id: 'featured-work-01',
+    title: 'Residence one',
+    image: '/images/featured-work/featured-work-01.png',
+    objectPosition: '50% 50%',
+    collapsedPosition: '50% 50%',
+  },
+  {
+    id: 'featured-work-02',
+    title: 'Residence two',
+    image: '/images/featured-work/featured-work-02.png',
+    objectPosition: '50% 50%',
+    collapsedPosition: '50% 40%',
+  },
+  {
+    id: 'featured-work-03',
+    title: 'Residence three',
+    image: '/images/featured-work/featured-work-03.jpg',
+    objectPosition: '50% 55%',
+    collapsedPosition: '50% 0%',
+  },
+];
+---
+
+<section class="featured-work" aria-labelledby="featured-work-heading">
+  <div class="featured-work__inner">
+    <div class="featured-work__header">
+      <h2 class="featured-work__heading" id="featured-work-heading">Featured Work</h2>
+      <button
+        class="featured-work__arrow"
+        type="button"
+        aria-label="Show next featured project"
+        data-featured-next
+      >
+        <svg class="featured-work__arrow-svg" viewBox="0 0 112 40" aria-hidden="true">
+          <path
+            d="M2 20 H96 M82 6 L98 20 L82 34"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="4"
+            stroke-linecap="square"
+            stroke-linejoin="miter"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div class="featured-work__gallery" data-featured-gallery>
+      {projects.map((project, index) => (
+        <button
+          class={[
+            'featured-work__panel',
+            `featured-work-${index + 1}`,
+            index === 0 ? 'featured-work__panel--active' : null,
+          ]
+            .filter(Boolean)
+            .join(' ')}
+          type="button"
+          aria-pressed={index === 0}
+          aria-label={`View ${project.title}`}
+          data-featured-panel
+          data-featured-index={String(index)}
+          style={`
+            --fw-active-pos: ${project.objectPosition};
+            --fw-collapsed-pos: ${project.collapsedPosition};
+          `}
+        >
+          <img
+            class="featured-work__image"
+            src={project.image}
+            alt=""
+            width="1600"
+            height="1067"
+            loading="lazy"
+          />
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const gallery = document.querySelector('[data-featured-gallery]');
+    const nextButton = document.querySelector('[data-featured-next]');
+    if (!gallery || !nextButton) return;
+
+    const panels = Array.from(gallery.querySelectorAll('[data-featured-panel]'));
+    const count = panels.length;
+    let activeIndex = 0;
+
+    function setActive(index) {
+      index = ((index % count) + count) % count;
+      if (index === activeIndex) return;
+      activeIndex = index;
+
+      panels.forEach((panel, i) => {
+        const isActive = i === activeIndex;
+        panel.setAttribute('aria-pressed', String(isActive));
+        panel.classList.toggle('featured-work__panel--active', isActive);
+      });
+    }
+
+    panels.forEach((panel, i) => {
+      panel.addEventListener('click', () => setActive(i));
+      panel.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          setActive(i);
+        }
+      });
+    });
+
+    nextButton.addEventListener('click', () => setActive(activeIndex + 1));
+    nextButton.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        setActive(activeIndex + 1);
+      }
+    });
+  })();
+</script>

@@ -5,7 +5,7 @@
   --champagne: #c3aa7d;
   --graphite: #77736b;
   --line: rgba(30, 29, 26, 0.18);
-  --page-gutter: clamp(1.35rem, 6.5vw, 7.5rem);
+  --page-gutter: clamp(3rem, 4vw, 3.5rem);
   --hero-text-bottom: clamp(4rem, 7vh, 6rem);
   --header-height: 4.5rem;
   --serif: 'Marcellus', 'Iowan Old Style', 'Baskerville', 'Times New Roman', serif;

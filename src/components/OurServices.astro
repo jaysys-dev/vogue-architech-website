@@ -1,0 +1,55 @@
+---
+import SectionArrow from './SectionArrow.astro';
+
+const services = [
+  {
+    id: 'services-01',
+    titleLines: ['Architecture', 'Design'],
+    image: '/images/services/service-01.jpg',
+  },
+  {
+    id: 'services-02',
+    titleLines: ['Real', 'Estate'],
+    image: '/images/services/service-02.jpg',
+  },
+  {
+    id: 'services-03',
+    titleLines: ['Virtual', 'Tours'],
+    image: '/images/services/service-03.jpg',
+  },
+  {
+    id: 'services-04',
+    titleLines: ['Landscape', 'and Interiors'],
+    image: '/images/services/service-04.jpg',
+  },
+];
+---
+
+<section class="our-services" aria-labelledby="our-services-heading">
+  <div class="our-services__inner">
+    <div class="our-services__header">
+      <h2 class="our-services__heading" id="our-services-heading">Our Services</h2>
+      <SectionArrow ariaLabel="Show next service" class="our-services__arrow" />
+    </div>
+
+    <div class="our-services__grid">
+      {services.map((service) => (
+        <article class="our-services__card">
+          <img
+            class="our-services__image"
+            src={service.image}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="our-services__gradient" aria-hidden="true"></div>
+          <h3 class="our-services__title">
+            {service.titleLines.map((line) => (
+              <span class="our-services__title-line">{line}</span>
+            ))}
+          </h3>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

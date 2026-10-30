@@ -1,0 +1,27 @@
+---
+interface Props {
+  ariaLabel?: string;
+  class?: string;
+  extraAttrs?: Record<string, string>;
+}
+
+const { ariaLabel = 'Show more', class: className = '', extraAttrs = {} } = Astro.props;
+---
+
+<button
+  class={["section-arrow", className].filter(Boolean).join(' ').trim()}
+  type="button"
+  aria-label={ariaLabel}
+  {...extraAttrs}
+>
+  <svg class="section-arrow__svg" viewBox="0 0 112 40" aria-hidden="true">
+    <path
+      d="M2 20 H96 M82 6 L98 20 L82 34"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="4"
+      stroke-linecap="square"
+      stroke-linejoin="miter"
+    />
+  </svg>
+</button>

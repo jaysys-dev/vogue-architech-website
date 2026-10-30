@@ -1,0 +1,317 @@
+---
+const services = [
+  'Architecture Design',
+  'Real Estate',
+  'Virtual Tours',
+  'Landscape and Interiors',
+];
+---
+
+<footer class="site-footer" aria-labelledby="site-footer-heading">
+  <div class="site-footer__image-wrap" aria-hidden="true">
+    <img
+      class="site-footer__image"
+      src="/images/hero/vogue-architech-hero.jpg"
+      alt=""
+      width="2000"
+      height="1333"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="site-footer__overlay" aria-hidden="true"></div>
+  </div>
+
+  <div class="site-footer__inner">
+    <div class="site-footer__content">
+      <div class="site-footer__upper">
+        <div class="site-footer__contact-message" id="site-footer-heading">
+          <span class="site-footer__line">Still not sure</span>
+          <span class="site-footer__line">where to start?</span>
+          <span class="site-footer__line">Fill out the form</span>
+          <span class="site-footer__line">to <span class="site-footer__line--gold">contact us</span></span>
+        </div>
+
+        <form class="site-footer__form" id="footer-demo-form" novalidate>
+          <h2 class="site-footer__form-heading">Get in touch with us</h2>
+
+          <div class="site-footer__form-row">
+            <div class="site-footer__form-field">
+              <label for="footer-name">Your name*</label>
+              <input
+                id="footer-name"
+                name="name"
+                type="text"
+                placeholder="Your name*"
+                required
+                aria-required="true"
+              />
+            </div>
+            <div class="site-footer__form-field">
+              <label for="footer-phone">Your phone number*</label>
+              <input
+                id="footer-phone"
+                name="phone"
+                type="tel"
+                placeholder="Your phone number*"
+                required
+                aria-required="true"
+              />
+            </div>
+          </div>
+
+          <div class="site-footer__form-row">
+            <div class="site-footer__form-field">
+              <label for="footer-email">Your email*</label>
+              <input
+                id="footer-email"
+                name="email"
+                type="email"
+                placeholder="Your email*"
+                required
+                aria-required="true"
+              />
+            </div>
+            <div class="site-footer__form-field">
+              <label for="footer-service">Select a service</label>
+              <div class="site-footer__select-control" id="footer-service-select">
+                <button
+                  id="footer-service-trigger"
+                  type="button"
+                  class="site-footer__select-trigger"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-controls="footer-service-options"
+                >
+                  <span class="site-footer__select-value">Select a service</span>
+                  <span class="site-footer__form-select-plus" aria-hidden="true">+</span>
+                </button>
+                <div
+                  class="site-footer__select-options"
+                  id="footer-service-options"
+                  role="listbox"
+                  hidden
+                >
+                  <button type="button" role="option" data-value="" aria-selected="false">
+                    Select a service
+                  </button>
+                  {services.map((service) => (
+                    <button type="button" role="option" data-value={service} aria-selected="false">
+                      {service}
+                    </button>
+                  ))}
+                </div>
+                <input
+                  type="hidden"
+                  name="service"
+                  id="footer-service"
+                  value=""
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="site-footer__form-field site-footer__form-field--full">
+            <label for="footer-message">Your message…</label>
+            <textarea
+              id="footer-message"
+              name="message"
+              placeholder="Your message…"
+              rows="5"
+              required
+              aria-required="true"
+            ></textarea>
+          </div>
+
+          <div class="site-footer__form-actions">
+            <button type="submit" class="site-footer__send">Send</button>
+          </div>
+
+          <div
+            class="site-footer__form-status"
+            id="footer-form-status"
+            role="status"
+            aria-live="polite"
+            hidden
+          >
+            Thank you. Your message has been captured for this demo.
+          </div>
+        </form>
+      </div>
+
+      <div class="site-footer__divider" aria-hidden="true"></div>
+
+      <div class="site-footer__lower">
+        <div class="site-footer__link-groups">
+          <div class="site-footer__link-group">
+            <h3 class="site-footer__group-heading">Quick Links</h3>
+            <ul class="site-footer__links">
+              <li><a href="/">Home</a></li>
+              <li><button type="button" class="site-footer__link-btn">About</button></li>
+              <li><button type="button" class="site-footer__link-btn">Services</button></li>
+              <li><button type="button" class="site-footer__link-btn">Portfolio</button></li>
+              <li><a href="/">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="site-footer__link-group">
+            <h3 class="site-footer__group-heading">Our socials</h3>
+            <ul class="site-footer__links">
+              <li><button type="button" class="site-footer__link-btn">LinkedIn</button></li>
+              <li><button type="button" class="site-footer__link-btn">Instagram</button></li>
+              <li><button type="button" class="site-footer__link-btn">Twitter/X</button></li>
+              <li><button type="button" class="site-footer__link-btn">TikTok</button></li>
+              <li><button type="button" class="site-footer__link-btn">YouTube</button></li>
+            </ul>
+          </div>
+
+          <div class="site-footer__link-group">
+            <h3 class="site-footer__group-heading">Contact</h3>
+            <ul class="site-footer__contact-details">
+              <li><a href="tel:+256774562876">+256 774 562876</a></li>
+              <li><a href="mailto:ericetellu@gmail.com">ericetellu@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="site-footer__brand">
+          <p class="site-footer__closing">
+            Our passion is to craft timeless aesthetics<br />
+            let’s create something amazing together!
+          </p>
+          <p class="site-footer__credit">Vogue architech website by xerun creative studios</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const form = document.getElementById('footer-demo-form');
+    const status = document.getElementById('footer-form-status');
+    const selectWrapper = document.getElementById('footer-service-select');
+    const trigger = document.getElementById('footer-service-trigger');
+    const valueSpan = document.getElementById('footer-service-value');
+    const optionsPanel = document.getElementById('footer-service-options');
+    const hiddenInput = document.getElementById('footer-service');
+
+    if (!form || !status || !selectWrapper || !trigger || !optionsPanel || !hiddenInput) return;
+
+    let selectedValue = '';
+
+    function closeOptions() {
+      trigger.setAttribute('aria-expanded', 'false');
+      optionsPanel.setAttribute('hidden', '');
+    }
+
+    function openOptions() {
+      trigger.setAttribute('aria-expanded', 'true');
+      optionsPanel.removeAttribute('hidden');
+    }
+
+    function updateSelection(value) {
+      selectedValue = value;
+      hiddenInput.value = value;
+      valueSpan.textContent = value === '' ? 'Select a service' : value;
+      const options = Array.from(optionsPanel.querySelectorAll('[role="option"]'));
+      options.forEach((opt) => {
+        const isSelected = opt.getAttribute('data-value') === value;
+        opt.setAttribute('aria-selected', String(isSelected));
+      });
+    }
+
+    function focusOption(index) {
+      const options = Array.from(optionsPanel.querySelectorAll('[role="option"]'));
+      if (options[index]) options[index].focus();
+    }
+
+    trigger.addEventListener('click', () => {
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      if (expanded) closeOptions(); else openOptions();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!selectWrapper.contains(event.target)) closeOptions();
+    });
+
+    trigger.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeOptions();
+        trigger.focus();
+      } else if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openOptions();
+      } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        openOptions();
+        focusOption(0);
+      }
+    });
+
+    optionsPanel.addEventListener('keydown', (event) => {
+      const options = Array.from(optionsPanel.querySelectorAll('[role="option"]'));
+      const currentIndex = options.indexOf(document.activeElement);
+
+      if (event.key === 'Escape') {
+        closeOptions();
+        trigger.focus();
+      } else if (event.key === 'Enter') {
+        event.preventDefault();
+        const active = document.activeElement;
+        if (active && active.getAttribute('role') === 'option') {
+          updateSelection(active.getAttribute('data-value'));
+          closeOptions();
+          trigger.focus();
+        }
+      } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        focusOption(Math.min(currentIndex + 1, options.length - 1));
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        focusOption(Math.max(currentIndex - 1, 0));
+      }
+    });
+
+    optionsPanel.addEventListener('click', (event) => {
+      const option = event.target.closest('[role="option"]');
+      if (option) {
+        updateSelection(option.getAttribute('data-value'));
+        closeOptions();
+        trigger.focus();
+      }
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const existingError = document.getElementById('footer-service-error');
+      if (existingError) existingError.hidden = true;
+
+      if (!hiddenInput.value) {
+        const errorMsg = document.createElement('span');
+        errorMsg.id = 'footer-service-error';
+        errorMsg.className = 'site-footer__select-error';
+        errorMsg.textContent = 'Please select a service.';
+        trigger.parentNode.appendChild(errorMsg);
+        errorMsg.hidden = false;
+        trigger.setAttribute('aria-describedby', 'footer-service-error');
+        trigger.focus();
+        openOptions();
+        return;
+      }
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      status.hidden = false;
+      status.setAttribute('aria-live', 'polite');
+
+      setTimeout(() => {
+        status.hidden = true;
+      }, 5000);
+    });
+  })();
+</script>

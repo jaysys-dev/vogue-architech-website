@@ -3,6 +3,7 @@ import '../styles/reset.css';
 import '../styles/tokens.css';
 import '../styles/typography.css';
 import '../styles/global.css';
+import SiteFooter from '../components/SiteFooter.astro';
 
 const {
   title = 'Vogue Architech',
@@ -30,5 +31,6 @@ const {
   </head>
   <body>
     <slot />
+    <SiteFooter />
   </body>
 </html>

@@ -1,0 +1,111 @@
+---
+const faqs = [
+  {
+    id: 'faq-01',
+    question: 'What do your architectural design services include?',
+    answer: 'It includes the design of outdoor areas, landmarks, and structures to achieve environmental, social-behavioural, or aesthetic outcomes.',
+  },
+  {
+    id: 'faq-02',
+    question: 'How is the overall design cost calculated?',
+    answer: 'The overall design cost is determined by the project’s scope, scale, complexity, required services, and level of detail. A clear proposal is prepared after the project requirements have been reviewed.',
+  },
+  {
+    id: 'faq-03',
+    question: 'How is the collaboration with clients conducted?',
+    answer: 'Collaboration begins with understanding the client’s goals, requirements, and constraints. Ideas are then developed and reviewed through clear project stages, allowing feedback to inform the design as it progresses.',
+  },
+  {
+    id: 'faq-04',
+    question: 'Do you provide construction support after design completion?',
+    answer: 'Construction support can be provided to help clarify the design, review its implementation, and maintain alignment between the approved drawings and the work on site. The exact level of support is agreed for each project.',
+  },
+];
+---
+
+<section class="faq-section" aria-labelledby="faq-heading">
+  <div class="faq-section__inner">
+    <h2 class="faq-section__heading" id="faq-heading">FAQ</h2>
+
+    <ul class="faq-list">
+      {faqs.map((faq, index) => {
+        const isOpen = index === 0;
+        return (
+          <li class="faq-item" data-faq-item>
+            <button
+              class={['faq-item__trigger', isOpen ? 'faq-item__trigger--open' : ''].filter(Boolean).join(' ')}
+              type="button"
+              aria-expanded={isOpen}
+              aria-controls={`faq-answer-${index}`}
+            >
+              <span class="faq-item__question">{faq.question}</span>
+              <span class="faq-item__icon" aria-hidden="true">
+                <span class="faq-item__icon-plus"></span>
+                <span class="faq-item__icon-minus"></span>
+              </span>
+            </button>
+            <div
+              id={`faq-answer-${index}`}
+              class={['faq-item__answer', isOpen ? 'faq-item__answer--open' : ''].filter(Boolean).join(' ')}
+              aria-hidden={String(!isOpen)}
+            >
+              <div class="faq-item__answer-inner">{faq.answer}</div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const items = Array.from(document.querySelectorAll('[data-faq-item]'));
+
+    items.forEach((item, index) => {
+      const trigger = item.querySelector('.faq-item__trigger');
+      const answer = item.querySelector('.faq-item__answer');
+      const isInitiallyOpen = index === 0;
+
+      function setOpen(open) {
+        const isCurrentlyOpen = trigger.getAttribute('aria-expanded') === 'true';
+        if (open === isCurrentlyOpen) return;
+
+        trigger.setAttribute('aria-expanded', String(open));
+        answer.setAttribute('aria-hidden', String(!open));
+
+        if (open) {
+          trigger.classList.add('faq-item__trigger--open');
+          answer.classList.add('faq-item__answer--open');
+          items.forEach((other) => {
+            if (other === item) return;
+            const otherTrigger = other.querySelector('.faq-item__trigger');
+            const otherAnswer = other.querySelector('.faq-item__answer');
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            otherAnswer.setAttribute('aria-hidden', 'true');
+            otherTrigger.classList.remove('faq-item__trigger--open');
+            otherAnswer.classList.remove('faq-item__answer--open');
+          });
+        } else {
+          trigger.classList.remove('faq-item__trigger--open');
+          answer.classList.remove('faq-item__answer--open');
+        }
+      }
+
+      trigger.addEventListener('click', () => {
+        setOpen(trigger.getAttribute('aria-expanded') !== 'true');
+      });
+
+      trigger.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          setOpen(trigger.getAttribute('aria-expanded') !== 'true');
+        }
+      });
+
+      if (isInitiallyOpen) {
+        setOpen(true);
+      }
+    });
+  })();
+</script>
